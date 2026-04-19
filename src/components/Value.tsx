@@ -3,18 +3,18 @@ import { useEffect, useRef } from 'react';
 import { useInView } from 'framer-motion';
 
 export default function Value() {
-  const values = [
+  const skillCategories = [
     {
-      title: "Innovation",
-      description: "Pushing boundaries and exploring new possibilities in every project."
+      category: "Frontend",
+      skills: ["HTML", "CSS", "JavaScript", "React.js", "Tailwind CSS"]
     },
     {
-      title: "Quality",
-      description: "Delivering excellence through attention to detail and best practices."
+      category: "Backend",
+      skills: ["Node.js", "Express.js", "MongoDB", "REST APIs"]
     },
     {
-      title: "Collaboration",
-      description: "Working together to create solutions that exceed expectations."
+      category: "Developer Skills",
+      skills: ["Full Stack Development", "Responsive Design", "Problem Solving", "Git & GitHub"]
     }
   ];
 
@@ -36,7 +36,6 @@ export default function Value() {
       transition: {
         staggerChildren: 0.3,
         duration: 1,
-        ease: [0.25, 0.8, 0.25, 1], // easeOutCubic
       }
     }
   };
@@ -48,7 +47,6 @@ export default function Value() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.25, 0.8, 0.25, 1], // smoother
       }
     }
   };
@@ -58,27 +56,38 @@ export default function Value() {
       id="values"
       aria-label="Core values section"
       ref={sectionRef}
-      className="min-h-screen w-full flex flex-col items-start justify-center bg-neutral-200 dark:bg-black transition-colors px-6 sm:px-8 py-12 sm:py-8"
+      className="min-h-screen w-full flex flex-col items-start justify-center bg-[#05020d] transition-colors px-6 sm:px-8 py-12 sm:py-8"
     >
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate={controls}
-        className="flex flex-col items-start justify-center text-left max-w-4xl mx-auto"
+        className="flex flex-col items-start justify-center text-left max-w-6xl mx-auto w-full"
       >
-        <div className="grid md:grid-cols-3 gap-12">
-          {values.map((value) => (
+        <h2 className="font-gambarino text-4xl sm:text-5xl md:text-6xl font-semibold mb-16 text-white">
+          My <span className="bg-gradient-to-r from-violet-300 via-fuchsia-300 to-cyan-200 bg-clip-text text-transparent">Skills</span>
+        </h2>
+        
+        <div className="grid md:grid-cols-3 gap-12 w-full">
+          {skillCategories.map((category) => (
             <motion.div
-              key={value.title}
+              key={category.category}
               variants={itemVariants}
               className="flex flex-col"
             >
-              <h3 className="font-gambarino text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 text-orange-600 dark:text-orange-600">
-                {value.title}
+              <h3 className="font-gambarino text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 text-violet-300">
+                {category.category}
               </h3>
-              <p className="text-lg sm:text-xl text-neutral-700 dark:text-neutral-300">
-                {value.description}
-              </p>
+              <div className="flex flex-wrap gap-3">
+                {category.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-200 text-sm font-medium hover:bg-violet-500/20 hover:border-violet-500/50 transition-all"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>

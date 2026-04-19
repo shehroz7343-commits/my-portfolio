@@ -4,26 +4,26 @@ export default function Contact() {
   const socialLinks = [
     {
       name: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/neelshha',
+      href: 'https://www.linkedin.com/in/shehroz7343',
     },
     {
       name: 'GitHub',
-      href: 'https://www.github.com/neelshha',
+      href: 'https://www.github.com/shehroz7343',
     },
     {
       name: 'Instagram',
-      href: 'https://www.instagram.com/neelshha/',
+      href: 'https://www.instagram.com/shehroz7343/',
     },
     {
       name: 'Email',
-      href: 'mailto:contact@neelshha.com',
+      href: 'mailto:shehroz7343@gmail.com',
     },
   ];
 
   return (
     <section
       id="contact"
-      className="min-h-screen w-full flex flex-col items-start justify-center bg-neutral-200 dark:bg-black transition-colors px-6 sm:px-8 py-12 sm:py-8"
+      className="min-h-screen w-full flex flex-col items-start justify-center bg-[#05020d] transition-colors px-6 sm:px-8 py-12 sm:py-8"
       aria-labelledby="contact-title"
     >
       <motion.div
@@ -69,7 +69,7 @@ export default function Contact() {
                     {link.name}
                   </span>
                   <span className="text-sm text-orange-600 dark:text-orange-600">
-                    {link.name === 'Email' ? 'contact@neelshha.com' : '@neelshha'}
+                    {link.name === 'Email' ? 'shehroz7343@gmail.com' : '@shehroz7343'}
                   </span>
                 </div>
                 <div className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full bg-neutral-600 dark:bg-neutral-600 transition-all duration-500" />
@@ -82,7 +82,7 @@ export default function Contact() {
 <div className="w-full mt-24 font-mono text-center px-4 text-xs sm:text-base text-neutral-500 dark:text-neutral-400 font-medium tracking-tight">
   🔒&nbsp;
   <a
-    href="https://securityheaders.com/?q=https://www.neelshha.com"
+    href="https://securityheaders.com/?q=https://www.muhammadshehroz.com"
     target="_blank"
     rel="noopener noreferrer"
     aria-label="View Security Headers verification report"
@@ -90,7 +90,7 @@ export default function Contact() {
   >
     A+ Security Verified
   </a>
-  &nbsp;·&nbsp;Built & secured by Neel Shah&nbsp;·&nbsp;© 2025
+  &nbsp;·&nbsp;Built & secured by Muhammad Shehroz&nbsp;·&nbsp;© 2025
 </div>
       </motion.div>
     </section>

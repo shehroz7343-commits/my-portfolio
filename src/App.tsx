@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-neutral-200 dark:bg-black transition-colors relative z-0">
+      <div className="min-h-screen bg-[#05020d] text-white transition-colors relative z-0">
         <AnimatePresence mode="wait">
           {isLoading && !hasLoadedOnce && (
             <Loading setIsLoading={setIsLoading} />

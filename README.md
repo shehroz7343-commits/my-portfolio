@@ -47,7 +47,7 @@ A sleek, modern, and responsive portfolio template built with Vite, React, TypeS
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/neelshha/my-portfolio.git
+    git clone https://github.com/muhammadshehroz/my-portfolio.git
     cd my-portfolio
     ```
 

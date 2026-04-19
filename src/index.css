@@ -18,7 +18,7 @@
   html,
   body {
     font-family: 'HealTheWebB', sans-serif;     /* Prevents scroll chaining */
-    @apply bg-orange-600;
+    @apply bg-[#05020d] text-white;
   }
 
   body::-webkit-scrollbar,

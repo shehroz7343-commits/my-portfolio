@@ -1,65 +1,69 @@
-import { useState, useEffect, useRef } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
-import resume from '../assets/resume.pdf';
+import resume from '../assets/Muhammad_Shehroz_MERN_CV.pdf';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const navLinks = [
+  { id: 'intro', label: 'Home' },
+  { id: 'work', label: 'Projects' },
+  { id: 'values', label: 'Skills' },
+  { id: 'background', label: 'Experience' },
+  { id: 'about', label: 'About' },
+  { id: 'contact', label: 'Contact' },
+];
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('intro');
   const observer = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const options = { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 };
+    const options = { root: null, rootMargin: '-40% 0px -40% 0px', threshold: 0 };
     observer.current = new IntersectionObserver((entries) => {
       entries.forEach(entry => entry.isIntersecting && setActiveSection(entry.target.id));
     }, options);
+
     const sections = document.querySelectorAll('section[id]');
     sections.forEach(sec => observer.current?.observe(sec));
+
     return () => sections.forEach(sec => observer.current?.unobserve(sec));
   }, []);
 
   const isActive = (section: string) => activeSection === section;
+
   const navLinkClass = (section: string) =>
-    `block text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors text-md font-gambarino tracking-tight leading-none ${
-      isActive(section) ? '!text-orange-600 dark:!text-orange-600 font-medium' : ''
-    }`;
-  const mobileNavLinkClass = (section: string) =>
-    `block text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors text-xl font-gambarino tracking-tight leading-none ${
-      isActive(section) ? '!text-orange-600 dark:!text-orange-600 font-medium' : ''
+    `text-slate-300 hover:text-white transition-colors text-sm font-gambarino tracking-tight leading-none ${
+      isActive(section) ? 'text-violet-300 font-semibold' : ''
     }`;
 
-  // Framer Motion variants
+  const mobileNavLinkClass = (section: string) =>
+    `block text-slate-200 hover:text-white transition-colors text-xl font-gambarino tracking-tight leading-none ${
+      isActive(section) ? 'text-violet-300 font-semibold' : ''
+    }`;
+
   const menuVariants = {
     hidden: { opacity: 0, y: '-100%' },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: 'easeOut', when: 'beforeChildren', staggerChildren: 0.1 },
+      transition: { duration: 0.6, when: 'beforeChildren', staggerChildren: 0.1 },
     },
     exit: {
       opacity: 0,
       y: '-100%',
-      transition: { duration: 0.5, ease: 'easeIn', staggerChildren: 0.1, staggerDirection: -1 },
+      transition: { duration: 0.5, staggerChildren: 0.1, staggerDirection: -1 },
     },
   };
 
   const linkVariants = {
     hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' } },
-    exit: { opacity: 0, x: -20, transition: { duration: 0.3, ease: 'easeIn' } },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
+    exit: { opacity: 0, x: -20, transition: { duration: 0.3 } },
   };
 
   return (
     <>
-      {/* Mobile/Tablet Menu */}
       <AnimatePresence mode="wait">
         {isMenuOpen && (
           <motion.div
@@ -68,34 +72,33 @@ export default function Navigation() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="lg:hidden fixed top-0 left-0 right-0 h-screen bg-neutral-200 dark:bg-black z-[100]"
+            className="lg:hidden fixed inset-0 z-[100] bg-[#05020d]"
           >
             <motion.div className="h-full flex flex-col justify-center items-start px-8 pb-8">
               <div className="space-y-6 w-full">
-                {['intro', 'work', 'values', 'background', 'about', 'contact'].map(sec => (
+                {navLinks.map((link) => (
                   <motion.a
-                    key={sec}
-                    href={`#${sec}`}
+                    key={link.id}
+                    href={`#${link.id}`}
                     variants={linkVariants}
                     className={
-                      `${mobileNavLinkClass(sec)} py-1 pl-2 pr-6 relative transition-all flex items-center justify-between` +
-                      (isActive(sec)
-                        ? ' !text-orange-600 dark:!text-orange-600 font-medium'
+                      `${mobileNavLinkClass(link.id)} py-1 pl-2 pr-6 relative transition-all flex items-center justify-between` +
+                      (isActive(link.id)
+                        ? ' font-semibold'
                         : ' hover:pl-3')
                     }
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <span>{sec.charAt(0).toUpperCase() + sec.slice(1)}</span>
+                    <span>{link.label}</span>
                   </motion.a>
                 ))}
-                {/* Divider above Resume */}
-                <div className="border-t border-neutral-300 dark:border-neutral-800 pt-4 mt-2 w-full">
+                <div className="border-t border-white/10 pt-4 mt-2 w-full">
                   <motion.a
                     href={resume}
-                    download
+                    download="Muhammad_Shehroz_MERN_CV.pdf"
                     variants={linkVariants}
                     onClick={() => setIsMenuOpen(false)}
-                    className="underline decoration-dotted underline-offset-2 text-neutral-500 dark:text-neutral-400 hover:text-orange-600 dark:hover:text-orange-600 transition-colors text-xl font-gambarino tracking-tight leading-none flex items-center gap-1 pt-2"
+                    className="underline decoration-dotted underline-offset-2 text-slate-200 hover:text-violet-300 transition-colors text-xl font-gambarino tracking-tight leading-none flex items-center gap-1 pt-2"
                   >
                     Resume*
                   </motion.a>
@@ -106,68 +109,54 @@ export default function Navigation() {
         )}
       </AnimatePresence>
 
-      {/* Desktop Navigation */}
       <motion.nav
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="fixed left-0 top-0 h-screen w-64 z-[101] hidden lg:flex flex-col"
+        className="hidden lg:flex fixed top-0 inset-x-0 z-[101] items-center justify-between border-b border-white/10 bg-black/50 px-10 py-5 backdrop-blur-xl"
       >
-        <div className="p-8 flex flex-col h-full">
-          <a href="#intro" className="text-xl font-gambarino text-orange-600 dark:text-orange-600 hover:text-orange-800 dark:hover:text-orange-800 transition-colors tracking-tight leading-none">
-            N.
+        <div className="flex items-center gap-4">
+          <a href="#intro" className="text-lg font-gambarino text-white tracking-tight transition hover:text-violet-300">
+            Muhammad Shehroz.
           </a>
-          <div className="flex-1 flex flex-col justify-center space-y-4">
-            {['intro', 'work', 'values', 'background', 'about', 'contact'].map(sec => (
-              <motion.a
-                key={sec}
-                initial={{ x: -10, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.1 }}
-                href={`#${sec}`}
-                className={navLinkClass(sec)}
-              >
-                {sec.charAt(0).toUpperCase() + sec.slice(1)}
-              </motion.a>
-            ))}
-            <motion.a
-              initial={{ x: -10, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.1 }}
-              href={resume}
-              download
-              className="underline decoration-dotted underline-offset-2 text-neutral-500 dark:text-neutral-400 hover:text-orange-600 dark:hover:text-orange-600 transition-colors text-md font-gambarino tracking-tight leading-none flex items-center gap-1"
-            >
-              Resume*
-            </motion.a>
-          </div>
-          <motion.div
-            initial={{ x: -10, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.1 }}
-            className="mt-8"
+          <span className="text-sm text-slate-400">Portfolio</span>
+        </div>
+
+        <div className="flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a key={link.id} href={`#${link.id}`} className={navLinkClass(link.id)}>
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-4">
+          <ThemeToggle />
+          <a
+            href={resume}
+            download="Muhammad_Shehroz_MERN_CV.pdf"
+            className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 transition hover:border-violet-300 hover:text-white"
           >
-            <ThemeToggle />
-          </motion.div>
+            Resume*
+          </a>
         </div>
       </motion.nav>
 
-      {/* Mobile Top Bar */}
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1 }}
-        className="lg:hidden fixed top-0 left-0 right-0 z-[101] flex items-center justify-between px-6 py-4 bg-gradient-to-b from-neutral-200 to-transparent dark:from-black dark:to-transparent"
+        className="lg:hidden fixed top-0 left-0 right-0 z-[101] flex items-center justify-between px-6 py-4 bg-black/70 backdrop-blur-xl"
       >
-        <a href="#intro" className="text-xl font-gambarino text-orange-600 dark:text-orange-600 hover:text-orange-800 dark:hover:text-orange-800 transition-colors tracking-tight leading-none">
-          N.
+        <a href="#intro" className="text-xl font-gambarino text-white hover:text-violet-300 transition-colors tracking-tight leading-none">
+          Sahil.
         </a>
         <div className="flex items-center space-x-4">
           <ThemeToggle />
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-            className="text-neutral-900 dark:text-white p-1"
+            className="text-white p-1"
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>

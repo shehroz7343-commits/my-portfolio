@@ -16,40 +16,22 @@ export default function Work() {
 
   const projects = [
     {
-      title: "Project One",
-      description: "A brief description of Project One, highlighting its main features and the problems it solves. This is a placeholder text.",
+      title: "E-Commerce Platform",
+      description: "Full-stack MERN application with product catalog, shopping cart, and secure payment integration. Built with MongoDB for data management and Express API.",
       image: "https://picsum.photos/seed/project1/400/225",
-      technologies: ["React", "TypeScript", "Node.js", "GraphQL"],
+      technologies: ["React.js", "Node.js", "Express", "MongoDB"],
     },
     {
-      title: "Project Two",
-      description: "A brief description of Project Two, highlighting its main features and the problems it solves. This is a placeholder text.",
+      title: "Task Management App",
+      description: "A collaborative task management tool built with React frontend and Node.js backend. Features real-time updates with MongoDB database integration.",
       image: "https://picsum.photos/seed/project2/400/225",
-      technologies: ["Next.js", "Tailwind CSS", "Prisma", "PostgreSQL"],
+      technologies: ["React.js", "Tailwind CSS", "Node.js", "MongoDB"],
     },
     {
-      title: "Project Three",
-      description: "A brief description of Project Three, highlighting its main features and the problems it solves. This is a placeholder text.",
+      title: "Social Media Dashboard",
+      description: "A responsive social media dashboard built with React and Tailwind CSS. Backend API developed with Express.js and MongoDB for user data management.",
       image: "https://picsum.photos/seed/project3/400/225",
-      technologies: ["Vue", "Firebase", "SCSS"],
-    },
-    {
-      title: "Project Four",
-      description: "A brief description of Project Four, highlighting its main features and the problems it solves. This is a placeholder text.",
-      image: "https://picsum.photos/seed/project4/400/225",
-      technologies: ["SvelteKit", "TypeScript", "tRPC"],
-    },
-    {
-      title: "Project Five",
-      description: "A brief description of Project Five, highlighting its main features and the problems it solves. This is a placeholder text.",
-      image: "https://picsum.photos/seed/project5/400/225",
-      technologies: ["Python", "Django", "Docker"],
-    },
-    {
-      title: "Project Six",
-      description: "A brief description of Project Six, highlighting its main features and the problems it solves. This is a placeholder text.",
-      image: "https://picsum.photos/seed/project6/400/225",
-      technologies: ["HTML", "CSS", "JavaScript"],
+      technologies: ["React.js", "Express", "MongoDB", "Tailwind CSS"],
     },
   ];
 
@@ -78,7 +60,7 @@ export default function Work() {
   return (
     <motion.section
       id="work"
-      className="min-h-screen w-full flex flex-col items-center justify-center bg-neutral-200 dark:bg-black transition-colors py-12 sm:py-8 md:pl-[10%]"
+      className="min-h-screen w-full flex flex-col items-center justify-center bg-[#05020d] transition-colors py-12 sm:py-8 lg:pl-[10%]"
       aria-labelledby="portfolio-title"
       initial="hidden"
       whileInView="visible"
@@ -129,7 +111,7 @@ export default function Work() {
                   <p className="text-neutral-600 dark:text-neutral-400 font-mono text-[1rem] leading-relaxed mb-3">
                     {project.description}
                   </p>
-                  <div className="flex flex-wrap gap-2 mb-2">
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
